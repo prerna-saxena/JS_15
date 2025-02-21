@@ -1,0 +1,61 @@
+Arrow functions revisited
+
+Arrow functions are not just a “shorthand” for writing small stuff. They have some very specific and useful features.
+JavaScript is full of situations where we need to write a small function that’s executed somewhere else.
+
+arr.forEach(func) – func is executed by forEach for every array item.
+setTimeout(func) – func is executed by the built-in scheduler.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7
+Arrow functions have no “this”
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+let group = {
+  title: "Our Group",
+  students: ["John", "Pete", "Alice"],
+
+  showList() {
+    this.students.forEach(
+      student => alert(this.title + ': ' + student)
+    );
+  }
+};
+
+group.showList();
+
+
+Arrow functions VS bind
+There’s a subtle difference between an arrow function => and a regular function called with .bind(this):
+
+.bind(this) creates a “bound version” of the function.
+The arrow => doesn’t create any binding. The function simply doesn’t have this. 
+The lookup of this is made exactly the same way as a regular variable search: in the outer lexical environment.
+
+
+Arrows have no “arguments”
+Arrow functions also have no arguments variable.
+That’s great for decorators, when we need to forward a call with the current this and arguments.
+For instance, defer(f, ms) gets a function and returns a wrapper around it that delays the call by ms milliseconds:
+
+Arrow functions:
+
+Do not have this
+Do not have arguments
+Can’t be called with new
+They also don’t have super, but we didn’t study it yet. We will on the chapter Class inheritance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
